@@ -1,22 +1,21 @@
-const { User } = require('./model/user')
-
 const express = require('express');
 const app = express();
+require('./config/db');
+
+const router = require('./router/api/user');
 
 app.use(express.json())
 
+// 静态资源文件
+app.use('/views/static',express.static('pubilc'))
+
+app.use(router);
+
 app.get('/', (req, res) => {
     res.send("ok")
+
 })
 
-app.post('/api/register', async (req, res) => {
-    console.log(req.body);
-    const user = await User.create({
-        username: req.body.username,
-        password:req.body.password,
-    })
-    res.send(user)
-})
 
 app.listen(3001, () => {
     console.log("http://localhost:3001");

@@ -1,9 +1,5 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/blog', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -11,6 +7,10 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 
