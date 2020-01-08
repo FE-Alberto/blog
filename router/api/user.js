@@ -5,7 +5,7 @@ const { User } = require('./../../model/user')
 router.get("/register",(req,res)=>{
     res.send("注册")
 })
-router.post('/api/register', async (req, res) => {
+router.post('/register', async (req, res) => {
     console.log(req.body);
     const user = await User.create({
         username: req.body.username,

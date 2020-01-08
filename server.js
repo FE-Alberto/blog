@@ -9,7 +9,7 @@ app.use(express.json())
 // 静态资源文件
 app.use('/views/static',express.static('pubilc'))
 
-app.use(router);
+app.use('/api/v1', router);
 
 app.get('/', (req, res) => {
     res.send("ok")
