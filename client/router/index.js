@@ -5,7 +5,11 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  
+  {
+    path: '*',
+    name: '404',
+    component: () => import('../views/404.vue')
+  },
   {
     path: '/',
     name: 'home',
@@ -18,11 +22,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({
-  mode:"history",
+  mode: "history",
   routes
 })
 
