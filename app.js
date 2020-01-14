@@ -12,40 +12,14 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(history({
-    rewrites:[
-        {
-            from: /^\dist\/.*$/,
-            to:function(content){
-                return content.parsedUrl.pathname;
-            }
-        },
-        {
-            from: /^\/.*[js|css]$/,
-            to:function (content) {
-                return '/dist/'+content.parsedUrl.pathname;
-            }
-        },
-        {
-            from: /^\/.*$/,
-            to:function(content){
-                return '/dist/';
-            }
-        }
-    ]
+    htmlAcceptHeaders: ['text/html', 'application/xhtml+xml']
 }));
 
-
-app.use(express.static(path.resolve(__dirname, "./dist")))
-
-
-
-
-
-app.get("*", (req, res) => {
-    const html = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf-8');
-    res.send(html);
+// 引用最后的静态文件
+app.use(express.static(path.join(__dirname, 'dist')))
+app.get('/', function (req, res) {
+    res.sendFile('/dist/index.html')
 })
-
 
 
 const port = process.env.NODE_ENV == 'production' ? 80 : 8032
